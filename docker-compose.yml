@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  nats:
+    image: 'nats:latest'
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+  api-producer:
+    build: "./api-producer"
+    depends_on:
+      - nats
+    environment:
+      - "NATS_URI=nats://nats:4222"
+    ports:
+      - "8080:8080"
+
+  consumer:
+    build: "./consumer"
+    depends_on:
+      - nats
+    environment:
+      - "NATS_URI=nats://nats:4222"
+
+  # general-processor:
+  #   build:
+  #     context: "./general-processor"
+  #   entrypoint: /go/general-processor
+  #   links:
+  #     - nats
+  #   environment:
+  #     - "NAT_URL=nats://nats:4222"
+  #   depends_on:
+  #     - nats
+  #   ports:
+  #     - "8181:8181"
