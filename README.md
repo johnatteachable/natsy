@@ -1,6 +1,6 @@
 # NATSY
 
-An example project for learning how to use nats-server and async event patterns from Go services.
+An example project for learning how to use [nats-server](https://github.com/nats-io/nats-server) and async event patterns from Go services.
 
 # Overview
 Project contains two small Go services: Api-Producer & Consumer.
@@ -27,7 +27,10 @@ Subscribed to subjects:
 - `ping.*.status` 
 - `price.created`
 
+Processes top level EventEnvelope before switching on subject to parse underlying data.
+
 Simulates a DB connection with a map
+- TODO add API to access keys
 
 # Running
 From main directory run 
